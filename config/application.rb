@@ -117,5 +117,15 @@ module Teambox
     end
   end
 
+  #FIXME find how move to config/initializers without fail
+  #if just copied there, it fails on development, for second request because models are reloaded for each request
+  #and miss their includes
+  config.from_file Rails.root.join('lib', 'customizations', 'schiller_knapp', 'config.yml')
+  I18n.load_path += Dir[Rails.root.join('lib', 'customizations', 'schiller_knapp', 'locale.yml')]
+  config.to_prepare do
+    Organization.send :include, Customizations::SchillerKnapp::Organization
+    Project.send :include, Customizations::SchillerKnapp::Project
+  end
+  
   Object.const_set(:APP_CONFIG, config)
 end

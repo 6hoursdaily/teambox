@@ -1,0 +1,5 @@
+en:
+  projects:
+    errors:
+      name:
+        taken: There is already a project with a given name
