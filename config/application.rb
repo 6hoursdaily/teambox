@@ -123,8 +123,10 @@ module Teambox
   config.from_file Rails.root.join('lib', 'customizations', 'schiller_knapp', 'config.yml')
   I18n.load_path += Dir[Rails.root.join('lib', 'customizations', 'schiller_knapp', 'locale.yml')]
   config.to_prepare do
+    Ability.send :include, Customizations::SchillerKnapp::Ability
     Organization.send :include, Customizations::SchillerKnapp::Organization
     Project.send :include, Customizations::SchillerKnapp::Project
+    ProjectsController.send :include, Customizations::SchillerKnapp::ProjectsController
   end
   
   Object.const_set(:APP_CONFIG, config)

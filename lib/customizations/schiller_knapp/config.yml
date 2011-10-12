@@ -2,3 +2,4 @@ development:
   customizations:
     schiller_knapp:
       organization_id: 1
+      can_archive_or_delete_project: frank corrina

@@ -22,7 +22,13 @@ class Ability
   end
 
   def initialize(user)
-    
+
+     # FIXME move somehow to customizations
+     can :archive_or_delete, Project do |project|
+       return true unless schiller_knapp?(project.user)
+       Teambox.config.customizations.schiller_knapp.can_archive_or_delete_project.split(' ').include? user.login
+     end
+   
     # Comment & commentable permissions
     
     can :update, Comment do |comment|
